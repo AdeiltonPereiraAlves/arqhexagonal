@@ -1,5 +1,6 @@
 import BancoInterface from "../portas/BancoInterface"
 import SenhaInterface from "../portas/SenhaInterface"
+import { Usuario } from "./Usuario"
 
 
 
@@ -14,7 +15,7 @@ export default class RegistrarUsuario {
     
     executar(nome: string, email: string, senha: string) {
         const senhaCripto = this.senha.criptarSenha(senha)
-        const usuario = {
+        const usuario:Usuario = {
             id: Math.random(),
             nome,
             email,
