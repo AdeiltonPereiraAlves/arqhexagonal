@@ -1,4 +1,4 @@
-import SenhaInterface from "../../core/portas/SenhaInterface";
+import SenhaInterface from "../../core/usuario/SenhaInterface";
 import bcrypt from 'bcrypt'
 export default class SenhaCripto implements SenhaInterface{
     

@@ -1,4 +1,4 @@
-import SenhaInterface from "../../core/portas/SenhaInterface";
+import SenhaInterface from "../../core/usuario/SenhaInterface";
 import bcrypt from 'bcrypt'
 
 //adapter
@@ -8,6 +8,12 @@ export default class SenhaReal implements SenhaInterface {
         return bcrypt.hashSync(senha, salt);
     }
     comparar(senha: string, senhaCripto: string): boolean {
+        console.log('Senha:', senha);
+        console.log('SenhaCripto:', senhaCripto);
+    
+        if (!senha || !senhaCripto) {
+            throw new Error('Senha ou hash não fornecidos');
+        }
         return  bcrypt.compareSync(senha, senhaCripto);
 
     }
