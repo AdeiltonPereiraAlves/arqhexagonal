@@ -1,48 +1,32 @@
+import CasoDeUso from "../shared/CasoDeUso";
+import Id from "../shared/Id";
+import SenhaInterface from "./SenhaInterface";
+import { Usuario } from "./Usuario";
+import UsuarioDbInterface from "./UsuarioDBInterface";
 
-import Id from "../shared/Id"
-import BancoInterface from "../portas/BancoInterface"
-import SenhaInterface from "./SenhaInterface"
-import { Usuario } from "./Usuario"
-import UsuarioDbInterface from "./UsuarioDBInterface"
-
-
-
+export type Dto = { nome: string; email: string; senha: string };
 
 // aplicaçao
-export default class RegistrarUsuario {
+export default class RegistrarUsuario implements CasoDeUso<Dto, Usuario> {
+  constructor(
+    private banco: UsuarioDbInterface,
+    private senha: SenhaInterface
+  ) {}
 
+  async executar(dto: Dto) {
+    const senhaCripto = await this.senha.criptarSenha(dto.senha);
+    const usuario: Usuario = {
+      id: Id.criar(),
+      nome: dto.nome,
+      email: dto.email,
+      senha: senhaCripto,
+    };
+    this.banco.inserir(usuario);
 
-  
+    return usuario;
+  }
 
-    constructor(private banco: UsuarioDbInterface, private senha: SenhaInterface) { }
-    
-    async executar(nome: string, email: string, senha: string) {
-        const senhaCripto = await this.senha.criptarSenha(senha)
-        const usuario: any= {
-            id: Id.criar(),
-            nome,
-            email,
-            senha: senhaCripto
-        }
-        this.banco.inserir(usuario)
-
-        return usuario
-
-
-
-
-
-    }
-    async login(email:string, senha: string){
-         const usuario = await this.banco.obterUsuario(email)
-
-          const senhaCripto = usuario.senha
-         return this.senha.comparar(senha, senhaCripto)
-
-
-    }
-    async obeterUsuarios(){
-        return await this.banco.obterUsuarios()
-    }
-
+  async obeterUsuarios() {
+    return await this.banco.obterUsuarios();
+  }
 }
