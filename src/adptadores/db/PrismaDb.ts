@@ -25,6 +25,7 @@ export default class PrismaDb implements UsuarioDbInterface {
         }
     }
     async obterUsuarios() {
+        
         return await this.db.usuario.findMany(
             {select: {
                 id: true,
