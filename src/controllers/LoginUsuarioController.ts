@@ -22,6 +22,7 @@ export default class LoginUsuarioController {
         })
         .status(201);
     } catch (e) {
+      console.log(e)
       res.status(404).send();
     }
   }
