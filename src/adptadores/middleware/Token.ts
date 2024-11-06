@@ -13,7 +13,7 @@ if (!segredo) {
   throw new Error("SECRET não está definido no arquivo de configuração.");
 }
 
-async function VerificarToken(req: Request, res: Response, next: NextFunction) {
+async function VerificarToken(req: Request, res: Response, next: NextFunction): Promise<NextFunction| any> {
   const header = req.headers["authorization"];
   const token = header && header.split(" ")[1]; // Extrai o token do cabeçalho
 

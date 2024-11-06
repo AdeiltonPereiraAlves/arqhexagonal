@@ -25,5 +25,14 @@ export default class PostDb implements PostDbInterface{
              throw new Error("Erro ao buscar post.");
          }
     }
+    async buscarPorId(id: string): Promise<Post|null>{
+        try {
+            const post = await this.db.post.findUnique({where: {id: id}})
+            return post;
+         } catch (error) {
+            
+             throw new Error("Erro ao buscar post por id.");
+         }
+    }
     
 }
