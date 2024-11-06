@@ -9,16 +9,21 @@ export default class PostDb implements PostDbInterface{
         this.db = new PrismaClient()
     }
     async inserir(post:Post): Promise<any> {
-        const{titulo, texto, curtida} = post 
+        const{titulo, texto, curtida, usuarioId} = post 
         try {
-             await this.db.post.create({data:{titulo, texto, curtida} as any})
+             await this.db.post.create({data:{titulo, texto, curtida, usuarioId} as any})
         } catch (error: any) {
              console.log(error)
             throw new Error("Erro ao criar post.");
         }
     }
-    buscarPosts(): Promise<any> {
-        throw new Error("Method not implemented.");
+    async buscarPosts(): Promise<any> {
+         try {
+            return this.db.post.findMany()
+         } catch (error) {
+            
+             throw new Error("Erro ao buscar post.");
+         }
     }
     
 }
