@@ -2,7 +2,7 @@ import JwtUsuario from "../../core/usuario/JwtUsuario";
 import  Jwt  from "jsonwebtoken";
 
 export default class JwtToken implements JwtUsuario{
-    gerarToken(email: string, senha: string, segredo: any) {
+    gerarToken(usuarioId:string, email: string, senha: string, segredo: any) {
         
         const token = Jwt.sign({email, senha}, segredo, {expiresIn: '1h'})
         return token;
