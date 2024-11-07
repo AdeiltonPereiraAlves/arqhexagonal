@@ -1,7 +1,7 @@
 import { Router } from "express";
 import UsuarioController from "../controllers/UsuarioController";
 import LoginUsuarioController from "../controllers/LoginUsuarioController";
-import { VerificarToken } from "../adptadores/middleware/Token";
+import { VerificarToken } from "../adptadores/middleware/VerificarToken";
 import RotaSecreta from "../controllers/RotaSecreta";
 const router = Router();
 
