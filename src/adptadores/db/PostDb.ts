@@ -41,4 +41,11 @@ export default class PostDb implements PostDbInterface {
       throw new Error("Erro ao deletar post por id.");
     }
   }
+  async editarPost(post:Post): Promise<any>{
+    try {
+      return  await this.db.post.update({where:{id: post.id}, data: { titulo: post.titulo, texto: post.texto}})
+    } catch (error) {
+      throw new Error("Erro ao editar post por id.");
+    }
+  }
 }
