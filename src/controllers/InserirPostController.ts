@@ -20,7 +20,7 @@ export default class InserirPostController {
         } catch (error) {
             console.error(error)
             if (!res.headersSent) {
-                res.sendStatus(500);
+                res.sendStatus(500)
             }
             
         }
