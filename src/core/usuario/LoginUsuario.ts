@@ -12,8 +12,13 @@ export default class LoginUsuario implements CasoDeUso<Dto, Saida> {
   constructor(private banco: PrismaDb, private senha: SenhaReal,private token: JwtToken) {}
   async executar(dto: Dto):Promise<Saida> {
     try {
+<<<<<<< HEAD
       const usuario = await this.banco.obterUsuario(dto.email);
       const usuarioId = usuario?.id as any
+=======
+      const usuario = await this.banco.obterUsuario(dto.email)
+      const usuarioId = usuario?.id as  any
+>>>>>>> 9bb058b59caa413c1c2f6200faee9edf8357cf60
       if(!usuario) throw new Error("Usuario não existe")
       const senhaCript = usuario?.senha as any;
       const mesmaSenha = this.senha.comparar(dto.senha, senhaCript);
