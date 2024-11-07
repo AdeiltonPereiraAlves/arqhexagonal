@@ -6,8 +6,8 @@ import PostDb from "../adptadores/db/PostDb";
 export default class InserirPostController {
     static async inserir(req: Request, res: Response): Promise<any> {
         try {
-            const {titulo, texto, curtida} = req.body 
-
+            const {titulo, texto, curtida} = req.body
+             
             const id = req.authUser?.id;// id estraido do payload do token
             
             if (!req.authUser || !req.authUser.id) {
